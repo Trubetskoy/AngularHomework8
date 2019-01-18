@@ -7,7 +7,6 @@ import {DialogOverviewExampleDialog} from '../modal/modal.component'
 
 
 @Component ({
-
     selector: 'user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss'],
@@ -18,7 +17,10 @@ export class UserComponent{
     todoList:any = []
     
     constructor(private fb: FormBuilder, private toDoService: ToDoServiceService, public dialog: MatDialog){
-        this.todoList = this.toDoService.getToDo()
+        this.toDoService.getToDo().then(res=>{
+          console.log(res)
+          this.todoList = res
+        })
     }
 
   animal: string;

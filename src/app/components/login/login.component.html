@@ -1,14 +1,14 @@
-<form [formGroup]="profileForm" (submit)='registration()'>
+<form [formGroup]="profileForm" (submit)='login()'>
   
     <label>
-      Login:
-      <input type="text" formControlName="Login">
+      Name:
+      <input type="text" formControlName="name">
     </label>
     
   
     <label>
       Password:
-      <input type="text" formControlName="Password">
+      <input type="text" formControlName="password">
     </label>
   <button> Button </button>
   </form>

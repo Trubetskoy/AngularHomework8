@@ -38,5 +38,26 @@ export class ApiService {
       }
     })
   }
-  
+
+  login (userData){
+   let data = {
+    'name': userData.name,
+    'password': userData.password
+    }
+    return new Promise((resolve, reject) => {
+      try {
+      this.http.post(`${url}/login`,data,{headers:this.defaultHeaders})
+        .subscribe((res:any)=>{
+           this.defaultHeaders.append('x-apikey',res.token)
+           resolve()
+         })
+        } catch(e){
+          reject(e)
+        }
+    })
+  }
+
+  getList(){
+   return this.http.get(`${url}/todolist`,{headers: this.defaultHeaders})
+  }
 }
