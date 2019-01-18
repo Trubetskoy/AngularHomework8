@@ -1,0 +1,16 @@
+<div class='wrapper'>
+    <mat-card>
+        <form [formGroup]="todoForm" (submit)="todoSubmit($event)" >
+            <input formControlName="todoInput">
+           <button mat-raised-button>Add</button>
+        </form>
+    </mat-card>
+    <div *ngFor="let task of todoList">
+        <p>{{task.value}}</p>
+        <button mat-raised-button (click)="openDialog(task.id, task.value)">Edit</button>
+        <button mat-raised-button (click)="openDeleteDialog(task.id, task.value)">Delete</button>
+    </div>
+</div>
+
+
+

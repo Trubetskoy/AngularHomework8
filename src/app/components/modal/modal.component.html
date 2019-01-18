@@ -1,0 +1,28 @@
+ 
+  <div mat-dialog-content>
+
+<div *ngIf="data.type === 'prompt'">
+    <p>Print edited task</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.value">
+    </mat-form-field>
+  
+  <div  mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  </div>
+</div>
+
+
+<div *ngIf="data.type === 'confirm'">
+    <p>Delete?</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.value">
+    </mat-form-field>
+  <div>
+    <div  mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Delete</button>
+    </div>
+  </div>
+</div>
