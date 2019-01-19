@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment} from '../../environments/environment';
 import { Router } from '@angular/router';
+import * as uuid from 'uuid'
 
 
 const url = environment.url
@@ -25,7 +26,20 @@ export class ApiService {
     }
 
    }
-   
+
+   addNewTodo (description, title){
+  const data =  {
+      userId: localStorage.apiKey,
+      title: title,
+      description: description,
+      status: "new",
+      selected: false
+  }
+      this.http.post(`${url}/api/todolist/${uuid()}`,data, {headers: this.defaultHeaders})
+      .subscribe(res=>{
+        console.log (res)
+      })
+   }
 
   registration (userData){
     let body = {

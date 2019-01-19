@@ -19,7 +19,6 @@ export class UserComponent{
     
     constructor(private fb: FormBuilder, private toDoService: ToDoServiceService, public dialog: MatDialog, private router:Router,){
         this.toDoService.getToDo().then(res=>{
-          console.log(res)
           this.todoList = res
         })
     }
@@ -35,7 +34,6 @@ export class UserComponent{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log ('result', result)
       if(result){
       this.toDoService.chengeToDo({_id:result._id, description:result.description})
   
@@ -54,19 +52,19 @@ export class UserComponent{
   
     }});
   }
+  
     todoForm = this.fb.group({
-        todoInput: ['some', [Validators.required, Validators.email]]
+        todoInput: ['some', [Validators.required, Validators.email]],
+        title:['title', Validators.required],
+       
     })
-    registration(){
-        console.log (this.todoForm)
-    }
+    
     todoSubmit (event){
-      this.todoList = this.toDoService.addToDo (this.todoForm.controls.todoInput.value)
+
+      this.todoList = this.toDoService.addToDo (this.todoForm.controls.todoInput.value, this.todoForm.controls.title.value)
               
     }
-    editToDoList (_id){
-        
-    }
+
     logout(){
       localStorage.clear()
       this.router.navigate(['login'])

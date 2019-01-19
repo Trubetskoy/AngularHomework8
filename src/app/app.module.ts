@@ -11,6 +11,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatDialogModule} from '@angular/material';
 import {DialogOverviewExampleDialog} from '../app/components/modal/modal.component'
 import { HttpClientModule } from '@angular/common/http';
+import {AuthenticationGuard} from './guards/authentication-guard'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     RegistrationComponent,
     LoginComponent,
     UserComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
   ],
   
   imports: [
@@ -33,9 +34,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
+    
   ],
   entryComponents: [DialogOverviewExampleDialog],
-  providers: [],
+  providers: [AuthenticationGuard,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

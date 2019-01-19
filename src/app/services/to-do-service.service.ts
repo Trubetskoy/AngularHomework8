@@ -11,10 +11,8 @@ export class ToDoServiceService {
 
   constructor(private ApiService:ApiService) { }
 
-  addToDo (description){
-    this.list.forEach(element => {
-      
-    });
+  addToDo (description, title){
+    this.ApiService.addNewTodo(description, title)
   this.list.push({_id: uuid(), description: description, status: false})
   return this.list
   }
