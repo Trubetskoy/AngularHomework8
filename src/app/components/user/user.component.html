@@ -6,10 +6,12 @@
         </form>
     </mat-card>
     <div *ngFor="let task of todoList">
-        <p>{{task.value}}</p>
-        <button mat-raised-button (click)="openDialog(task.id, task.value)">Edit</button>
-        <button mat-raised-button (click)="openDeleteDialog(task.id, task.value)">Delete</button>
+        <p>{{task.description}}</p>
+        <button mat-raised-button (click)="openDialog(task._id, task.description)">Edit</button>
+        <button mat-raised-button (click)="openDeleteDialog(task._id, task.description)">Delete</button>
     </div>
+
+    <button (click)='logout($event)'> Logout </button>
 </div>
 
 

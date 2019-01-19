@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {Validators, FormBuilder } from '@angular/forms';
 import {ToDoServiceService} from '../../services/to-do-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {DialogOverviewExampleDialog} from '../modal/modal.component'
+import {DialogOverviewExampleDialog} from '../modal/modal.component';
+import {Router} from '@angular/router'
 
 
 
@@ -16,7 +17,7 @@ import {DialogOverviewExampleDialog} from '../modal/modal.component'
 export class UserComponent{
     todoList:any = []
     
-    constructor(private fb: FormBuilder, private toDoService: ToDoServiceService, public dialog: MatDialog){
+    constructor(private fb: FormBuilder, private toDoService: ToDoServiceService, public dialog: MatDialog, private router:Router,){
         this.toDoService.getToDo().then(res=>{
           console.log(res)
           this.todoList = res
@@ -26,16 +27,17 @@ export class UserComponent{
   animal: string;
   name: string;
 
-  openDialog(taskId, value): void {
+  openDialog(taskId, description): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {id: taskId, value: value, type:'prompt'},
-      minHeight:'350px',
+      data: {_id: taskId, description: description, type:'prompt'},
+      minHeight:'350px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log ('result', result)
       if(result){
-      this.toDoService.chengeToDo({id:result.id, value:result.value})
+      this.toDoService.chengeToDo({_id:result._id, description:result.description})
   
     }});
   }
@@ -43,12 +45,12 @@ export class UserComponent{
    
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {id: taskId, type:'confirm'}
+      data: {_id: taskId, type:'confirm'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-      this.toDoService.deleteToDo({id:result.id})
+      this.toDoService.deleteToDo({_id:result._id})
   
     }});
   }
@@ -62,7 +64,11 @@ export class UserComponent{
       this.todoList = this.toDoService.addToDo (this.todoForm.controls.todoInput.value)
               
     }
-    editToDoList (id){
+    editToDoList (_id){
         
     }
+    logout(){
+      localStorage.clear()
+      this.router.navigate(['login'])
+     }
 }

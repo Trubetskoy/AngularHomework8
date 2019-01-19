@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {ToDoListInterface} from '../models/toDoList.Interface'
 import * as uuid from 'uuid'
 import {ApiService} from './api.service'
 
@@ -8,16 +7,18 @@ import {ApiService} from './api.service'
 })
 export class ToDoServiceService {
 
-  list: any = [{_id: uuid(), value: 'some text', isDone: false}, {id: uuid(), value: 'more text', isDone: true}]
+  list: any = [{_id: uuid(), description: 'some text', status: false}, {id: uuid(), description: 'more text', status: true}]
 
   constructor(private ApiService:ApiService) { }
-  addToDo (value){
+
+  addToDo (description){
     this.list.forEach(element => {
       
     });
-  this.list.push({_id: uuid(), value: value, isDone: false})
+  this.list.push({_id: uuid(), description: description, status: false})
   return this.list
   }
+
   getToDo (){
   return  new Promise((resolve, reject)=>{
     this.ApiService.getList().subscribe(res=>{
@@ -27,17 +28,18 @@ export class ToDoServiceService {
    })
   }
 
-  chengeToDo ( {id, value}){
+  chengeToDo ( {_id, description}){
     this.list.forEach((item)=>{
-      if (item._id === id ){
-        item.value = value
+      if (item._id === _id ){
+        item.description = description
       }
     })
   }
-  deleteToDo ({id}){
+
+  deleteToDo ({_id}){
     this.list.forEach((item)=>{
-      if (item._id === id){
-        this.list.splice(id, 1)
+      if (item._id === _id){
+        this.list.splice(_id, 1)
       }
     })
   }

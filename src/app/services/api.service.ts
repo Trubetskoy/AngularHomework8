@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment} from '../../environments/environment';
+import { Router } from '@angular/router';
 
 
 const url = environment.url
@@ -12,11 +13,19 @@ export class ApiService {
  private defaultHeaders:HttpHeaders
   
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
+
     this.defaultHeaders = new HttpHeaders({
       'Content-Type':'application/json'
     })
+    console.log(localStorage.apiKey)
+    if(localStorage.apiKey){
+      this.defaultHeaders = this.defaultHeaders.append('x-apikey', localStorage.apiKey)
+      console.log(this.defaultHeaders)
+    }
+
    }
+   
 
   registration (userData){
     let body = {
@@ -30,7 +39,8 @@ export class ApiService {
      try {
       this.http.post(`${url}/registration`, body,{headers:this.defaultHeaders})
         .subscribe((res:any) => {
-          this.defaultHeaders.append('x-apikey',res.token)
+          localStorage.apiKey = res.token
+          this.defaultHeaders = this.defaultHeaders.append('x-apikey',res.token)
           resolve()
         })
       } catch (e) {
@@ -48,7 +58,9 @@ export class ApiService {
       try {
       this.http.post(`${url}/login`,data,{headers:this.defaultHeaders})
         .subscribe((res:any)=>{
-           this.defaultHeaders.append('x-apikey',res.token)
+          localStorage.apiKey = res.token
+          this.defaultHeaders = this.defaultHeaders.append('x-apikey',res.token)
+
            resolve()
          })
         } catch(e){
@@ -58,6 +70,7 @@ export class ApiService {
   }
 
   getList(){
+   
    return this.http.get(`${url}/todolist`,{headers: this.defaultHeaders})
   }
 }

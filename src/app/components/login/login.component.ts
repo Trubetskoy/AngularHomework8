@@ -23,14 +23,12 @@ export class LoginComponent{
         password: ['',[Validators.required, Validators.minLength(3)]],
     })
     login(){
-        console.log (this.profileForm)
         event.preventDefault()
         if (this.profileForm.valid){
             this.ApiService.login(this.profileForm.value).then(res=>{
                 this.router.navigate(['user'])
             }).catch(e=>{
                 if(e.status === 'INVALID'){
-                    console.log(e)
                     alert('incorrect user data')
                 }
             })
