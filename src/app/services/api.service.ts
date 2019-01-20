@@ -19,25 +19,22 @@ export class ApiService {
     this.defaultHeaders = new HttpHeaders({
       'Content-Type':'application/json'
     })
-    console.log(localStorage.apiKey)
     if(localStorage.apiKey){
       this.defaultHeaders = this.defaultHeaders.append('x-apikey', localStorage.apiKey)
-      console.log(this.defaultHeaders)
+    }
     }
 
-   }
-
    addNewTodo (description, title){
-  const data =  {
-      userId: localStorage.apiKey,
-      title: title,
-      description: description,
-      status: "new",
-      selected: false
-  }
-      this.http.post(`${url}/api/todolist/${uuid()}`,data, {headers: this.defaultHeaders})
-      .subscribe(res=>{
-        console.log (res)
+     const data =  {
+         userId: localStorage.apiKey,
+         title: title,
+         description: description,
+         status: "new",
+         selected: false
+     }
+     this.http.post(`${url}/todolist`,data, {headers: this.defaultHeaders})
+      .subscribe(res => {
+        console.log(res)
       })
    }
 

@@ -31,7 +31,6 @@ export class RegistrationComponent{
     registration(event){
         this.submited = true
         event.preventDefault()
-        console.log(this.registrationForm)
         if (this.registrationForm.valid){
             this.ApiService.registration(this.registrationForm.value).then(res=>{
                 this.router.navigate(['user'])
