@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment} from '../../environments/environment';
 import { Router } from '@angular/router';
 import * as uuid from 'uuid'
+import { reject, resolve } from 'q';
 
 
 const url = environment.url
@@ -83,5 +84,29 @@ export class ApiService {
   getList(){
    
    return this.http.get(`${url}/todolist`,{headers: this.defaultHeaders})
+  }
+
+  editList(toDoItem, description){
+    const data =  {
+      userId: localStorage.apiKey,
+      title: toDoItem.title,
+      description: description,
+      status: toDoItem.status,
+      selected: toDoItem.selected,
+    }
+    return new Promise((resolve, reject) => {
+      try {
+      this.http.put(`${url}/todolist/${toDoItem._id}`,data , {headers: this.defaultHeaders})
+      .subscribe((res:any)=>{
+        resolve(res)
+      })
+      } catch(e){
+        reject(e)
+      }
+    })    
+  }
+
+  deleteToDo (id) {
+    return this.http.delete(`${url}/todolist/${id}`,{headers:this.defaultHeaders})
   }
 }

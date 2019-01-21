@@ -19,6 +19,7 @@ export class UserComponent{
     
     constructor(private fb: FormBuilder, private toDoService: ToDoServiceService, public dialog: MatDialog, private router:Router,){
         this.toDoService.getToDo().then(res=>{
+          console.log(322222, res)
           this.todoList = res
         })
     }
@@ -35,6 +36,7 @@ export class UserComponent{
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
+        console.log(666, result)
       this.toDoService.chengeToDo({_id:result._id, description:result.description})
   
     }});
@@ -69,4 +71,11 @@ export class UserComponent{
       localStorage.clear()
       this.router.navigate(['login'])
      }
+    
+    checkedToDoItem(event, task){
+      console.log(event)
+      console.log(task)
+      task.selected = event.checked
+      this.toDoService.chengeToDo({_id:task._id, description:task.description})
+    }
 }

@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {ApiService} from '../../services/api.service'
-import {Router} from '@angular/router'
+import {ApiService} from '../../services/api.service';
+import {Router} from '@angular/router';
 
 @Component ({
-
     selector: 'login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],

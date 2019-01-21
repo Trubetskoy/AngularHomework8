@@ -7,7 +7,7 @@ import {ApiService} from './api.service'
 })
 export class ToDoServiceService {
 
-  list: any = [{_id: uuid(), description: 'some text', status: false}, {id: uuid(), description: 'more text', status: true}]
+  list: any =[]
 
   constructor(private ApiService:ApiService) { }
 
@@ -29,7 +29,9 @@ export class ToDoServiceService {
   chengeToDo ( {_id, description}){
     this.list.forEach((item)=>{
       if (item._id === _id ){
-        item.description = description
+        this.ApiService.editList(item, description).then(res => {
+          item.description = description
+        })
       }
     })
   }
@@ -37,7 +39,9 @@ export class ToDoServiceService {
   deleteToDo ({_id}){
     this.list.forEach((item)=>{
       if (item._id === _id){
-        this.list.splice(_id, 1)
+        this.ApiService.deleteToDo(item._id).subscribe (res => {
+          this.list.splice(_id, 1)
+        })
       }
     })
   }

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {RegistrationComponent} from './components/registration/registration.component';
@@ -11,7 +10,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatDialogModule} from '@angular/material';
 import {DialogOverviewExampleDialog} from '../app/components/modal/modal.component'
 import { HttpClientModule } from '@angular/common/http';
-import {AuthenticationGuard} from './guards/authentication-guard'
+import {AuthenticationGuard} from './guards/authentication-guard';
+import {MatCheckboxModule} from '@angular/material/checkbox'
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import {AuthenticationGuard} from './guards/authentication-guard'
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
+    MatCheckboxModule,
     
   ],
   entryComponents: [DialogOverviewExampleDialog],
