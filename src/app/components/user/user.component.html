@@ -6,13 +6,24 @@
            <button mat-raised-button>Add</button>
         </form>
     </mat-card>
-    <div *ngFor="let task of todoList">
+    <div class='test'   *ngFor="let task of todoList">
+        <div class='test'  [ngClass]="{'checked':task.selected}">
         <mat-checkbox [checked]='task.selected' (change)='checkedToDoItem($event, task)'>Check me!</mat-checkbox>
+            <mat-form-field>
+                <mat-select (selectionChange)='onOptionChange($event, task)'[(value)]="task.status">
+                  <mat-option value="new">New</mat-option>
+                  <mat-option value="done">Done</mat-option>
+                  <mat-option value="inProgress">In progress</mat-option>
+                </mat-select>
+            </mat-form-field>
+        <p>{{task.title}}</p>
         <p>{{task.description}}</p>
-        <button mat-raised-button (click)="openDialog(task._id, task.description)">Edit</button>
+        <button mat-raised-button (click)="openDialog(task)">Edit</button>
         <button mat-raised-button (click)="openDeleteDialog(task._id, task.description)">Delete</button>
     </div>
+    </div>
 
+    
     <button (click)='logout($event)'> Logout </button>
 </div>
 

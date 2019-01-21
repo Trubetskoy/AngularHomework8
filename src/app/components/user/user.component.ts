@@ -4,6 +4,7 @@ import {ToDoServiceService} from '../../services/to-do-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {DialogOverviewExampleDialog} from '../modal/modal.component';
 import {Router} from '@angular/router'
+import { discardPeriodicTasks } from '@angular/core/testing';
 
 
 
@@ -27,17 +28,18 @@ export class UserComponent{
   animal: string;
   name: string;
 
-  openDialog(taskId, description): void {
+  openDialog(task): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {_id: taskId, description: description, type:'prompt'},
+      data: {_id:task._id, description: task.description, type:'prompt'},
       minHeight:'350px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        console.log(666, result)
-      this.toDoService.chengeToDo({_id:result._id, description:result.description})
+      let newData = task
+      newData.description = result.description
+      this.toDoService.chengeToDo(newData)
   
     }});
   }
@@ -62,8 +64,11 @@ export class UserComponent{
     })
     
     todoSubmit (event){
-
-      this.todoList = this.toDoService.addToDo (this.todoForm.controls.todoInput.value, this.todoForm.controls.title.value)
+      event.preventDefault()
+      this.toDoService.addToDo (this.todoForm.controls.todoInput.value, this.todoForm.controls.title.value)
+      .then((res)=>{
+        this.todoList = res
+      })
               
     }
 
@@ -73,9 +78,11 @@ export class UserComponent{
      }
     
     checkedToDoItem(event, task){
-      console.log(event)
-      console.log(task)
       task.selected = event.checked
-      this.toDoService.chengeToDo({_id:task._id, description:task.description})
+      this.toDoService.chengeToDo(task)
+    }
+
+    onOptionChange (event, task){
+      this.toDoService.chengeToDo(task)
     }
 }

@@ -8,15 +8,13 @@
     </mat-form-field>
   
   <div  mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="onNoClick()">No need</button>
     <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
   </div>
 </div>
 
-
 <div *ngIf="data.type === 'confirm'">
     <p>Are you shure?</p>
-
   <div>
     <div  mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No</button>

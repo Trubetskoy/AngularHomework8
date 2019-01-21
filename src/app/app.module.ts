@@ -11,7 +11,8 @@ import {MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatD
 import {DialogOverviewExampleDialog} from '../app/components/modal/modal.component'
 import { HttpClientModule } from '@angular/common/http';
 import {AuthenticationGuard} from './guards/authentication-guard';
-import {MatCheckboxModule} from '@angular/material/checkbox'
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
     MatDialogModule,
     HttpClientModule,
     MatCheckboxModule,
+    MatSelectModule,
     
   ],
   entryComponents: [DialogOverviewExampleDialog],

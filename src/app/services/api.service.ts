@@ -26,18 +26,25 @@ export class ApiService {
     }
 
    addNewTodo (description, title){
-     const data =  {
+    return new Promise ((resolve,reject) => {
+      try {
+        const data =  {
          userId: localStorage.apiKey,
          title: title,
          description: description,
          status: "new",
          selected: false
+        }
+         this.http.post(`${url}/todolist`,data, {headers: this.defaultHeaders})
+        .subscribe(res => {
+          console.log('res', res)
+        resolve(data)
+       })
+      } catch (e) {
+      reject(e)
      }
-     this.http.post(`${url}/todolist`,data, {headers: this.defaultHeaders})
-      .subscribe(res => {
-        console.log(res)
-      })
-   }
+    })
+  }
 
   registration (userData){
     let body = {

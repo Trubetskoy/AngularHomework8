@@ -6,15 +6,25 @@ import {ApiService} from './api.service'
   providedIn: 'root'
 })
 export class ToDoServiceService {
+  selected = 'option2';
 
   list: any =[]
 
   constructor(private ApiService:ApiService) { }
 
-  addToDo (description, title){
-    this.ApiService.addNewTodo(description, title)
-  this.list.push({_id: uuid(), description: description, status: false})
-  return this.list
+  addToDo (description, title): Promise<any>{
+   return new Promise((resolve, reject)=>{
+      try{
+      this.ApiService.addNewTodo(description, title).then((data)=>{
+        this.list.push({_id: uuid(), description: description, status: false, title: title})
+        
+        resolve(this.list) 
+      })}
+      catch(e){
+        reject(e)
+      }
+    })
+    
   }
 
   getToDo (){
@@ -26,11 +36,11 @@ export class ToDoServiceService {
    })
   }
 
-  chengeToDo ( {_id, description}){
+  chengeToDo (task){
     this.list.forEach((item)=>{
-      if (item._id === _id ){
-        this.ApiService.editList(item, description).then(res => {
-          item.description = description
+      if (item._id ===  task._id ){
+        this.ApiService.editList(item, task.description).then(res => {
+          item = res
         })
       }
     })
@@ -45,4 +55,5 @@ export class ToDoServiceService {
       }
     })
   }
+  
 }
