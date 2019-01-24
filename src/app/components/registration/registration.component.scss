@@ -1,3 +1,43 @@
 p {
-font-size: 14px;
+font-size: 13px;
+margin-top: 0px;
+}
+form {
+    display: block;
+    position: absolute;
+    float: left;
+}
+
+.clear {
+    display: block;
+    clear: both;
+}
+
+#email {
+    display: flex;
+}
+
+#surname {
+    display: flex;
+}
+
+#name {
+    display: flex;
+}
+
+#phone {
+    display: flex;
+}
+
+#password {
+    display: flex;
+}
+
+input {
+    height: 25px; 
+    font-size: 20px;
+}
+
+label {
+    margin-top: 10px;
 }

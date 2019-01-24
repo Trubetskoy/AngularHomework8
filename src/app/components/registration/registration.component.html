@@ -1,35 +1,41 @@
 <form [formGroup]="registrationForm" (submit)='registration($event)'>
   
     <label for="surname">
-      surname:
+      Surname:
     </label>
       <input id="surname" type="text" formControlName="surname">
+      <div class='clear'></div>
     <p *ngIf='registrationForm.controls.surname.errors'>sername Required</p>
+   
 
     <label for='email'>
       Email:
     </label >
       <input id='email' type="text" formControlName="email">
+      <div class='clear'></div>
     <p *ngIf='registrationForm.controls.email.errors'>Email Required</p>
   
     <label for='name'>
       Name:
     </label>
       <input id='name' type="text" formControlName="name">
+      <div class='clear'></div>
     <p *ngIf='registrationForm.controls.name.errors'>name Required</p>
    
     <label for='phone'>
       Phone:
     </label>
       <input id='phone' type="text" formControlName="phone">
+      <div class='clear'></div>
     <p *ngIf='registrationForm.controls.phone.errors'>phone must have minimum 10simbols</p>
 
     <label for='password'>
         Password:
     </label>
         <input id='password' type="text" formControlName="password">
+        <div class='clear'></div>
       <p *ngIf='registrationForm.controls.password.errors'>min Password leanth 6</p>
    
-  <button> Registration </button>
+  <button> Submit </button>
   </form>
 
