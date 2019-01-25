@@ -7,8 +7,10 @@ body {
     background-color: aqua;
 }
 header ul {
+    min-width: 269px;
     display: flex;
     list-style-type: none;
     justify-content: space-between;
     padding-inline-start: 0px;
 }
+

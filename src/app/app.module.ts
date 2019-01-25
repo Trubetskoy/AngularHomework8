@@ -14,6 +14,8 @@ import {AuthenticationGuard} from './guards/authentication-guard';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,7 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule,
     MatCheckboxModule,
     MatSelectModule,
+    
     
   ],
   entryComponents: [DialogOverviewExampleDialog],

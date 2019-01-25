@@ -1,7 +1,44 @@
 .checked{
-    background-color: red;
+    background-color: rgb(165, 133, 133);
+}
+.test {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 15px;
 }
 
 mat-card {
     background-color: rgb(21, 105, 105);
+}
+
+input {
+    height: 30px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.mat-form-field-infix {
+    float: right;
+}
+
+
+.mat-checkbox-layout {
+    margin-top: 10px;
+}
+
+.clear {
+    display: block;
+    clear: both;
+}
+button{
+    background-color: gray;
+    float: right;
+}
+.logoutBtn {
+    margin-top: 15px;
+}
+
+.editBtn {
+    margin-left: 10px;
 }

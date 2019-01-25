@@ -5,6 +5,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {DialogOverviewExampleDialog} from '../modal/modal.component';
 import {Router} from '@angular/router'
 import { discardPeriodicTasks } from '@angular/core/testing';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 
