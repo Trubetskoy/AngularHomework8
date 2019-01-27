@@ -13,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {AuthenticationGuard} from './guards/authentication-guard';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatSortModule} from '@angular/material/sort';
+import { PipesPipe } from './components/pipes/pipes.pipe';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
     LoginComponent,
     UserComponent,
     DialogOverviewExampleDialog,
+    PipesPipe,
   ],
   
   imports: [
@@ -39,8 +41,7 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule,
     MatCheckboxModule,
     MatSelectModule,
-    
-    
+    MatSortModule,
   ],
   entryComponents: [DialogOverviewExampleDialog],
   providers: [AuthenticationGuard,],

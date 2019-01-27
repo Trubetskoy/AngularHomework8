@@ -21,13 +21,13 @@ export class UserComponent{
     
     constructor(private fb: FormBuilder, private toDoService: ToDoServiceService, public dialog: MatDialog, private router:Router,){
         this.toDoService.getToDo().then(res=>{
-          console.log(322222, res)
           this.todoList = res
         })
     }
 
   animal: string;
   name: string;
+  toDoFilter: string = null;
 
   openDialog(task): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
@@ -85,5 +85,9 @@ export class UserComponent{
 
     onOptionChange (event, task){
       this.toDoService.chengeToDo(task)
+    }
+
+    changeFilter (filterValue){
+      this.toDoFilter = filterValue
     }
 }

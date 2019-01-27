@@ -6,11 +6,19 @@
            <button mat-raised-button>Add</button>
         </form>
     </mat-card>
+
+    <span class='filter'>
+     <button mat-raised-button (click)="changeFilter('new')">New</button>
+     <button mat-raised-button (click)="changeFilter('done')">Done</button>
+     <button mat-raised-button (click)="changeFilter('inProgress')">In Progress</button>
+     <button mat-raised-button (click)="changeFilter(null)">All</button>
+    </span>
     
-    <div class='test'   *ngFor="let task of todoList">
+    <div class=''   *ngFor="let task of todoList | toDoFilter: toDoFilter">
         <div class='test'  [ngClass]="{'checked':task.selected}">
      <div>
         <mat-checkbox [checked]='task.selected' (change)='checkedToDoItem($event, task)'></mat-checkbox>
+        <button mat-raised-button>Load Image</button>
             <mat-form-field>
                 <mat-select (selectionChange)='onOptionChange($event, task)'[(value)]="task.status">
                   <mat-option value="new">New</mat-option>
@@ -28,7 +36,6 @@
      </div>
     </div>
     </div>
-
     
     <button mat-button (click)='logout($event)' class='logoutBtn'> Logout </button>
 </div>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {ApiService} from '../../services/api.service'
 import {Router} from '@angular/router'
@@ -11,13 +11,14 @@ import {Router} from '@angular/router'
 }
 )
 
-export class RegistrationComponent{
+export class RegistrationComponent {
     submited: boolean
     constructor(
         private router:Router,
         private fb: FormBuilder,
          private ApiService: ApiService
          ){
+             alert ('constructor')
         this.submited = false
     }
 

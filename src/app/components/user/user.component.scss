@@ -6,6 +6,10 @@
     justify-content: space-between;
     flex-direction: column;
     margin-top: 15px;
+  border-style: solid;
+}
+.toDo {
+    border-style: solid; 
 }
 
 mat-card {
@@ -41,4 +45,10 @@ button{
 
 .editBtn {
     margin-left: 10px;
+}
+.filter{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    
 }
