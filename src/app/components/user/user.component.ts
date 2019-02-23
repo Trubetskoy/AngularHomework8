@@ -1,18 +1,14 @@
 import {Component} from '@angular/core';
 import {Validators, FormBuilder } from '@angular/forms';
 import {ToDoServiceService} from '../../services/to-do-service.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {DialogOverviewExampleDialog} from '../modal/modal.component';
 import {Router} from '@angular/router';
-import { discardPeriodicTasks } from '@angular/core/testing';
-import {MatDividerModule} from '@angular/material/divider';
-
-
 
 @Component ({
-    selector: 'user',
-    templateUrl: './user.component.html',
-    styleUrls: ['./user.component.scss'],
+  selector: 'user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss'],
 }
 )
 
