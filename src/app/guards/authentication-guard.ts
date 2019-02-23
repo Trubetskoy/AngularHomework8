@@ -9,11 +9,11 @@ export class AuthenticationGuard implements CanActivate {
   }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (localStorage.apiKey){
-        return true
+    if (localStorage.apiKey) {
+        return true;
     } else {
-        this.router.navigate(['login'])
-        return false
+        this.router.navigate(['login']);
+        return false;
     }
   }
 }

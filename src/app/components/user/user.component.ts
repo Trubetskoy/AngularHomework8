@@ -3,7 +3,7 @@ import {Validators, FormBuilder } from '@angular/forms';
 import {ToDoServiceService} from '../../services/to-do-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {DialogOverviewExampleDialog} from '../modal/modal.component';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
 import { discardPeriodicTasks } from '@angular/core/testing';
 import {MatDividerModule} from '@angular/material/divider';
 
@@ -16,78 +16,78 @@ import {MatDividerModule} from '@angular/material/divider';
 }
 )
 
-export class UserComponent{
-    todoList:any = []
-    
-    constructor(private fb: FormBuilder, private toDoService: ToDoServiceService, public dialog: MatDialog, private router:Router,){
-        this.toDoService.getToDo().then(res=>{
-          this.todoList = res
-        })
+export class UserComponent {
+
+    constructor(private fb: FormBuilder, private toDoService: ToDoServiceService, public dialog: MatDialog, private router: Router, ) {
+        this.toDoService.getToDo().then(res => {
+          this.todoList = res;
+        });
     }
+    todoList: any = [];
 
   animal: string;
   name: string;
   toDoFilter: string = null;
 
+    todoForm = this.fb.group({
+        todoInput: ['some', [Validators.required, Validators.email]],
+        title: ['title', Validators.required],
+
+    });
+
   openDialog(task): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {_id:task._id, description: task.description, type:'prompt'},
-      minHeight:'350px'
+      data: {_id: task._id, description: task.description, type: 'prompt'},
+      minHeight: '350px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-      let newData = task
-      newData.description = result.description
-      this.toDoService.chengeToDo(newData)
-  
+      if (result) {
+      const newData = task;
+      newData.description = result.description;
+      this.toDoService.chengeToDo(newData);
+
     }});
   }
   openDeleteDialog(taskId): void {
-   
+
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {_id: taskId, type:'confirm'}
+      data: {_id: taskId, type: 'confirm'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-      this.toDoService.deleteToDo({_id:result._id})
-  
+      if (result) {
+      this.toDoService.deleteToDo({_id: result._id});
+
     }});
   }
-  
-    todoForm = this.fb.group({
-        todoInput: ['some', [Validators.required, Validators.email]],
-        title:['title', Validators.required],
-       
-    })
-    
-    todoSubmit (event){
-      event.preventDefault()
+
+    todoSubmit (event) {
+      event.preventDefault();
       this.toDoService.addToDo (this.todoForm.controls.todoInput.value, this.todoForm.controls.title.value)
-      .then((res)=>{
-        this.todoList = res
-      })
-              
+      .then((res) => {
+        this.todoList = res;
+      });
+
     }
 
-    logout(){
-      localStorage.clear()
-      this.router.navigate(['login'])
+    logout() {
+      localStorage.clear();
+      this.router.navigate(['login']);
      }
-    
-    checkedToDoItem(event, task){
-      task.selected = event.checked
-      this.toDoService.chengeToDo(task)
+
+    checkedToDoItem(event, task) {
+      task.selected = event.checked;
+      this.toDoService.chengeToDo(task);
     }
 
-    onOptionChange (event, task){
-      this.toDoService.chengeToDo(task)
+    onOptionChange (event, task) {
+      this.toDoService.chengeToDo(task);
     }
 
-    changeFilter (filterValue){
-      this.toDoFilter = filterValue
+    changeFilter (filterValue) {
+      this.toDoFilter = filterValue;
     }
 }

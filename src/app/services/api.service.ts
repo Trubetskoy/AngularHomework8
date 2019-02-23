@@ -2,118 +2,118 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment} from '../../environments/environment';
 import { Router } from '@angular/router';
-import * as uuid from 'uuid'
+import * as uuid from 'uuid';
 import { reject, resolve } from 'q';
 
 
-const url = environment.url
+const url = environment.url;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
- private defaultHeaders:HttpHeaders
-  
+ private defaultHeaders: HttpHeaders;
+
 
   constructor(private http: HttpClient, private router: Router) {
 
     this.defaultHeaders = new HttpHeaders({
-      'Content-Type':'application/json'
-    })
-    if(localStorage.apiKey){
-      this.defaultHeaders = this.defaultHeaders.append('x-apikey', localStorage.apiKey)
+      'Content-Type': 'application/json'
+    });
+    if (localStorage.apiKey) {
+      this.defaultHeaders = this.defaultHeaders.append('x-apikey', localStorage.apiKey);
     }
     }
 
-   addNewTodo (description, title){
-    return new Promise ((resolve,reject) => {
+   addNewTodo (description, title) {
+    return new Promise ((resolve, reject) => {
       try {
         const data =  {
          userId: localStorage.apiKey,
          title: title,
          description: description,
-         status: "new",
+         status: 'new',
          selected: false
-        }
-         this.http.post(`${url}/todolist`,data, {headers: this.defaultHeaders})
+        };
+         this.http.post(`${url}/todolist`, data, {headers: this.defaultHeaders})
         .subscribe(res => {
-          console.log('res', res)
-        resolve(data)
-       })
+          console.log('res', res);
+        resolve(data);
+       });
       } catch (e) {
-      reject(e)
+      reject(e);
      }
-    })
+    });
   }
 
-  registration (userData){
-    let body = {
+  registration (userData) {
+    const body = {
       name: userData.name,
 	    surname: userData.surname,
     	email: userData.email,
     	phone: userData.phone,
     	password: userData.password
-    }
-   return new Promise ((resolve,reject) => {
+    };
+   return new Promise ((resolve, reject) => {
      try {
-      this.http.post(`${url}/registration`, body,{headers:this.defaultHeaders})
-        .subscribe((res:any) => {
-          localStorage.apiKey = res.token
-          this.defaultHeaders = this.defaultHeaders.append('x-apikey',res.token)
-          resolve()
-        })
+      this.http.post(`${url}/registration`, body, {headers: this.defaultHeaders})
+        .subscribe((res: any) => {
+          localStorage.apiKey = res.token;
+          this.defaultHeaders = this.defaultHeaders.append('x-apikey', res.token);
+          resolve();
+        });
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
-  login (userData){
-   let data = {
+  login (userData) {
+   const data = {
     'name': userData.name,
     'password': userData.password
-    }
+    };
     return new Promise((resolve, reject) => {
       try {
-      this.http.post(`${url}/login`,data,{headers:this.defaultHeaders})
-        .subscribe((res:any)=>{
-          localStorage.apiKey = res.token
-          this.defaultHeaders = this.defaultHeaders.append('x-apikey',res.token)
+      this.http.post(`${url}/login`, data, {headers: this.defaultHeaders})
+        .subscribe((res: any) => {
+          localStorage.apiKey = res.token;
+          this.defaultHeaders = this.defaultHeaders.append('x-apikey', res.token);
 
-           resolve()
-         })
-        } catch(e){
-          reject(e)
+           resolve();
+         });
+        } catch (e) {
+          reject(e);
         }
-    })
+    });
   }
 
-  getList(){
-   
-   return this.http.get(`${url}/todolist`,{headers: this.defaultHeaders})
+  getList() {
+
+   return this.http.get(`${url}/todolist`, {headers: this.defaultHeaders});
   }
 
-  editList(toDoItem, description){
+  editList(toDoItem, description) {
     const data =  {
       userId: localStorage.apiKey,
       title: toDoItem.title,
       description: description,
       status: toDoItem.status,
       selected: toDoItem.selected,
-    }
+    };
     return new Promise((resolve, reject) => {
       try {
-      this.http.put(`${url}/todolist/${toDoItem._id}`,data , {headers: this.defaultHeaders})
-      .subscribe((res:any)=>{
-        resolve(res)
-      })
-      } catch(e){
-        reject(e)
+      this.http.put(`${url}/todolist/${toDoItem._id}`, data , {headers: this.defaultHeaders})
+      .subscribe((res: any) => {
+        resolve(res);
+      });
+      } catch (e) {
+        reject(e);
       }
-    })    
+    });
   }
 
   deleteToDo (id) {
-    return this.http.delete(`${url}/todolist/${id}`,{headers:this.defaultHeaders})
+    return this.http.delete(`${url}/todolist/${id}`, {headers: this.defaultHeaders});
   }
 }

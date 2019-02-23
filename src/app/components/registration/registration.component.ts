@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {ApiService} from '../../services/api.service'
-import {Router} from '@angular/router'
+import {ApiService} from '../../services/api.service';
+import {Router} from '@angular/router';
 
 @Component ({
 
@@ -12,28 +12,28 @@ import {Router} from '@angular/router'
 )
 
 export class RegistrationComponent {
-    submited: boolean
+    submited: boolean;
     constructor(
-        private router:Router,
+        private router: Router,
         private fb: FormBuilder,
          private ApiService: ApiService
-         ){
-             alert ('constructor')
-        this.submited = false
+         ) {
+             alert ('constructor');
+        this.submited = false;
     }
 
     registrationForm = this.fb.group({
-        name: ['',[Validators.required]],
+        name: ['', [Validators.required]],
         surname: ['', [Validators.required]],
-        email:['',[Validators.required, Validators.email]],
-        phone:['',[Validators.required, Validators.minLength(10)]],
-        password: ['',[Validators.required, Validators.minLength(6)]],
-    })
-    registration(event){
-        this.submited = true
-        event.preventDefault()
-        if (this.registrationForm.valid){
-            this.ApiService.registration(this.registrationForm.value).then(res=>{
-                this.router.navigate(['user'])
-            })
+        email: ['', [Validators.required, Validators.email]],
+        phone: ['', [Validators.required, Validators.minLength(10)]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+    registration(event) {
+        this.submited = true;
+        event.preventDefault();
+        if (this.registrationForm.valid) {
+            this.ApiService.registration(this.registrationForm.value).then(res => {
+                this.router.navigate(['user']);
+            });
     }}}
