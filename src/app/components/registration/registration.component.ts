@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';
 
-@Component ({
-
-    selector: 'registration',
-    templateUrl: './registration.component.html',
-    styleUrls: ['./registration.component.scss']
-}
+@Component({
+        selector: 'registration',
+        templateUrl: './registration.component.html',
+        styleUrls: ['./registration.component.scss']
+    }
 )
 
 export class RegistrationComponent {
     submited: boolean;
+
     constructor(
         private router: Router,
         private fb: FormBuilder,
-         private ApiService: ApiService
-         ) {
-             alert ('constructor');
+        private apiService: ApiService
+    ) {
+        alert('constructor');
         this.submited = false;
     }
 
@@ -29,11 +29,14 @@ export class RegistrationComponent {
         phone: ['', [Validators.required, Validators.minLength(10)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
     });
+
     registration(event) {
         this.submited = true;
         event.preventDefault();
         if (this.registrationForm.valid) {
-            this.ApiService.registration(this.registrationForm.value).then(res => {
+            this.apiService.registration(this.registrationForm.value).then(res => {
                 this.router.navigate(['user']);
             });
-    }}}
+        }
+    }
+}
