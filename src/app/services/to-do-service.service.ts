@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as uuid from 'uuid';
-import {ApiService} from './api.service';
+import { ApiService } from './api.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +16,7 @@ export class ToDoServiceService {
         return new Promise((resolve, reject) => {
             try {
                 this.apiService.addNewTodo(description, title).then((data) => {
-                    this.list.push({_id: uuid(), description: description, status: false, title: title});
+                    this.list.push({ id: uuid(), description: description, status: false, title: title });
 
                     resolve(this.list);
                 });
@@ -37,7 +37,7 @@ export class ToDoServiceService {
 
     chengeToDo(task) {
         this.list.forEach((item) => {
-            if (item._id === task._id) {
+            if (item.id === task.id) {
                 this.apiService.editList(item, task.description).then(res => {
                     item = res;
                 });
@@ -45,11 +45,12 @@ export class ToDoServiceService {
         });
     }
 
-    deleteToDo({_id}) {
+    deleteToDo({ id }) {
+        console.log(id)
         this.list.forEach((item) => {
-            if (item._id === _id) {
-                this.apiService.deleteToDo(item._id).subscribe(res => {
-                    this.list.splice(_id, 1);
+            if (item.id === id) {
+                this.apiService.deleteToDo(item.id).subscribe(res => {
+                    this.list.splice(id, 1);
                 });
             }
         });

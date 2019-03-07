@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://lectorium.herokuapp.com/api'
+  url: 'http://localhost:3219/api'
 };
 
 /*

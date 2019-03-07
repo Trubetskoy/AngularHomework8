@@ -32,7 +32,7 @@ export class UserComponent {
     openDialog(task): void {
         const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
             width: '250px',
-            data: {_id: task._id, description: task.description, type: 'prompt'},
+            data: {id: task.id, description: task.description, type: 'prompt'},
             minHeight: '350px'
         });
 
@@ -49,12 +49,12 @@ export class UserComponent {
     openDeleteDialog(taskId): void {
         const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
             width: '250px',
-            data: {_id: taskId, type: 'confirm'}
+            data: {id: taskId, type: 'confirm'}
         });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.toDoService.deleteToDo({_id: result._id});
+                this.toDoService.deleteToDo({id: result.id});
             }
         });
     }

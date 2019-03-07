@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
+import * as uuid from 'uuid';
 
 const url = environment.url;
 
@@ -18,7 +19,7 @@ export class ApiService {
             'Content-Type': 'application/json'
         });
         if (localStorage.apiKey) {
-            this.defaultHeaders = this.defaultHeaders.append('x-apikey', localStorage.apiKey);
+            this.defaultHeaders = this.defaultHeaders.set('x-apikey', localStorage.apiKey);
         }
     }
 
@@ -30,9 +31,10 @@ export class ApiService {
                     title: title,
                     description: description,
                     status: 'new',
-                    selected: false
+                    selected: false,
+                    id: uuid()
                 };
-                this.http.post(`${url}/todolist`, data, {headers: this.defaultHeaders})
+                this.http.post(`${url}/todolist`, data, { headers: this.defaultHeaders })
                     .subscribe(res => {
                         console.log('res', res);
                         resolve(data);
@@ -53,10 +55,11 @@ export class ApiService {
         };
         return new Promise((resolve, reject) => {
             try {
-                this.http.post(`${url}/registration`, body, {headers: this.defaultHeaders})
+                this.http.post(`${url}/registration`, body, { headers: this.defaultHeaders })
                     .subscribe((res: any) => {
+                        console.log(res)
                         localStorage.apiKey = res.token;
-                        this.defaultHeaders = this.defaultHeaders.append('x-apikey', res.token);
+                        this.defaultHeaders = this.defaultHeaders.set('x-apikey', res.token);
                         resolve();
                     });
             } catch (e) {
@@ -67,15 +70,16 @@ export class ApiService {
 
     login(userData) {
         const data = {
-            'name': userData.name,
+            'email': userData.email,
             'password': userData.password
         };
         return new Promise((resolve, reject) => {
             try {
-                this.http.post(`${url}/login`, data, {headers: this.defaultHeaders})
+                this.http.post(`${url}/login`, data, { headers: this.defaultHeaders })
                     .subscribe((res: any) => {
                         localStorage.apiKey = res.token;
-                        this.defaultHeaders = this.defaultHeaders.append('x-apikey', res.token);
+                        console.log(res)
+                        this.defaultHeaders = this.defaultHeaders.set('x-apikey', res.token);
 
                         resolve();
                     });
@@ -86,7 +90,7 @@ export class ApiService {
     }
 
     getList() {
-        return this.http.get(`${url}/todolist`, {headers: this.defaultHeaders});
+        return this.http.get(`${url}/todolist`, { headers: this.defaultHeaders });
     }
 
     editList(toDoItem, description) {
@@ -96,10 +100,11 @@ export class ApiService {
             description: description,
             status: toDoItem.status,
             selected: toDoItem.selected,
+            id: toDoItem.id
         };
         return new Promise((resolve, reject) => {
             try {
-                this.http.put(`${url}/todolist/${toDoItem._id}`, data, {headers: this.defaultHeaders})
+                this.http.put(`${url}/todolist/${toDoItem.id}`, data, { headers: this.defaultHeaders })
                     .subscribe((res: any) => {
                         resolve(res);
                     });
@@ -110,6 +115,6 @@ export class ApiService {
     }
 
     deleteToDo(id) {
-        return this.http.delete(`${url}/todolist/${id}`, {headers: this.defaultHeaders});
+        return this.http.delete(`${url}/todolist/${id}`, { headers: this.defaultHeaders });
     }
 }

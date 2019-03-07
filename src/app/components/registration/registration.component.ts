@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ApiService} from '../../services/api.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
-        selector: 'registration',
-        templateUrl: './registration.component.html',
-        styleUrls: ['./registration.component.scss']
-    }
+    selector: 'registration',
+    templateUrl: './registration.component.html',
+    styleUrls: ['./registration.component.scss']
+}
 )
 
 export class RegistrationComponent {
@@ -18,7 +18,6 @@ export class RegistrationComponent {
         private fb: FormBuilder,
         private apiService: ApiService
     ) {
-        alert('constructor');
         this.submited = false;
     }
 

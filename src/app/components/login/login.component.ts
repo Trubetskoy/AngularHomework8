@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ApiService} from '../../services/api.service';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
-        selector: 'login',
-        templateUrl: './login.component.html',
-        styleUrls: ['./login.component.scss'],
-    }
+    selector: 'login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+}
 )
 
 export class LoginComponent {
@@ -15,10 +15,10 @@ export class LoginComponent {
         private fb: FormBuilder,
         private router: Router,
         private apiService: ApiService
-    ) {}
+    ) { }
 
     profileForm = this.fb.group({
-        name: ['', [Validators.required]],
+        email: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.minLength(3)]],
     });
 

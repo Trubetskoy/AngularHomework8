@@ -32,7 +32,7 @@
         <p>title: {{task.title}}</p>
         <p>description: {{task.description}}</p>
         <button mat-raised-button (click)="openDialog(task)" class='editBtn'>Edit</button>
-        <button mat-raised-button (click)="openDeleteDialog(task._id, task.description)">Delete</button>
+        <button mat-raised-button (click)="openDeleteDialog(task.id, task.description)">Delete</button>
      </div>
     </div>
     </div>
