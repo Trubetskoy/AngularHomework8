@@ -36,7 +36,7 @@ export class ApiService {
                 };
                 this.http.post(`${url}/todolist`, data, { headers: this.defaultHeaders })
                     .subscribe(res => {
-                        console.log('res', res);
+
                         resolve(data);
                     });
             } catch (e) {
@@ -57,7 +57,6 @@ export class ApiService {
             try {
                 this.http.post(`${url}/registration`, body, { headers: this.defaultHeaders })
                     .subscribe((res: any) => {
-                        console.log(res)
                         localStorage.apiKey = res.token;
                         this.defaultHeaders = this.defaultHeaders.set('x-apikey', res.token);
                         resolve();
@@ -78,7 +77,6 @@ export class ApiService {
                 this.http.post(`${url}/login`, data, { headers: this.defaultHeaders })
                     .subscribe((res: any) => {
                         localStorage.apiKey = res.token;
-                        console.log(res)
                         this.defaultHeaders = this.defaultHeaders.set('x-apikey', res.token);
 
                         resolve();

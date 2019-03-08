@@ -16,8 +16,7 @@ export class ToDoServiceService {
         return new Promise((resolve, reject) => {
             try {
                 this.apiService.addNewTodo(description, title).then((data) => {
-                    this.list.push({ id: uuid(), description: description, status: false, title: title });
-
+                    this.list.push(data);
                     resolve(this.list);
                 });
             } catch (e) {
@@ -46,7 +45,6 @@ export class ToDoServiceService {
     }
 
     deleteToDo({ id }) {
-        console.log(id)
         this.list.forEach((item) => {
             if (item.id === id) {
                 this.apiService.deleteToDo(item.id).subscribe(res => {
